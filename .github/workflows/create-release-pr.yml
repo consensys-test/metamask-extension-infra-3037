@@ -82,15 +82,13 @@ jobs:
       pull-requests: write
     steps:
       - name: Create Release PR
-        uses: MetaMask/github-tools/.github/actions/create-release-pr@v1
+        uses: MetaMask/github-tools/.github/actions/create-release-pr@chore/INFRA-3067-ref-duplication
         with:
           platform: extension
           checkout-base-branch: ${{ needs.resolve-bases.outputs.checkout_base }}
           release-pr-base-branch: ${{ needs.resolve-bases.outputs.release_base }}
           semver-version: ${{ inputs.semver-version }}
           previous-version-ref: ${{ needs.resolve-previous-ref.outputs.previous_ref }}
-          # This token needs write permissions to metamask-extension & read permissions to metamask-planning
-          # If called from auto-create-release-pr use the PR_TOKEN passed in as an input, if called manually use github secret token values
-          # (this is due to github limitations on fetching secrets from called workflows).
-          github-token: ${{ github.event_name == 'workflow_dispatch' && secrets.PR_TOKEN || secrets.github-token }}
-          google-application-creds-base64: ${{ github.event_name == 'workflow_dispatch' && secrets.GCP_RLS_SHEET_ACCOUNT_BASE64 || secrets.google-application-creds-base64 }}
+          # Use standard GITHUB_TOKEN for testing in fork
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          google-application-creds-base64: 'dummy'

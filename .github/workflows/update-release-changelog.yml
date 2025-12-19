@@ -48,10 +48,10 @@ jobs:
       pull-requests: write
     steps:
       - name: Update Release Changelog
-        uses: MetaMask/github-tools/.github/actions/update-release-changelog@v1
+        uses: MetaMask/github-tools/.github/actions/update-release-changelog@chore/INFRA-3067-ref-duplication
         with:
           release-branch: ${{ github.ref_name }}
           repository-url: ${{ github.server_url }}/${{ github.repository }}
           platform: extension
           previous-version-ref: 'null'
-          github-token: ${{ secrets.PR_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
