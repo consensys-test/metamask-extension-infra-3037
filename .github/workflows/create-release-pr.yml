@@ -88,7 +88,8 @@ jobs:
           checkout-base-branch: ${{ needs.resolve-bases.outputs.checkout_base }}
           release-pr-base-branch: ${{ needs.resolve-bases.outputs.release_base }}
           semver-version: ${{ inputs.semver-version }}
-          previous-version-ref: ${{ needs.resolve-previous-ref.outputs.previous_ref }}
+          # Use a recent SHA from your branch here to limit the changelog scan and avoid slowness
+          previous-version-ref: ${{ github.sha }}
           # Use standard GITHUB_TOKEN for testing in fork
           github-token: ${{ secrets.GITHUB_TOKEN }}
           google-application-creds-base64: 'dummy'

@@ -51,7 +51,8 @@ jobs:
         uses: MetaMask/github-tools/.github/actions/update-release-changelog@chore/INFRA-3067-ref-duplication
         with:
           release-branch: ${{ github.ref_name }}
-          repository-url: ${{ github.server_url }}/${{ github.repository }}
+          # Use upstream for PR metadata to avoid slowness in fork
+          repository-url: 'https://github.com/MetaMask/metamask-extension'
           platform: extension
           previous-version-ref: 'null'
           github-token: ${{ secrets.GITHUB_TOKEN }}
